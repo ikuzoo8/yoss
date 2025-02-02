@@ -2,13 +2,41 @@ name: inichain
 
 services:
   node1:
-    image: ghcr.io/veiurt/arety:latest
+    image: ghcr.io/ikuzoo8/yoss:latest
     restart: unless-stopped
     cpuset: '${CPU_SET}'
     environment:
       - ETH_ADRRDESS=${ETH_ADRRDESS}
-      - WORK_NAME=${WORK_NAME}_1
+      - WORK_NAME=${WORK_NAME}
       - POOL=${POOL}
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 2048m
+
+  node2:
+    image: ghcr.io/ikuzoo8/yoss:latest
+    restart: unless-stopped
+    cpuset: '${CPU_SET}'
+    environment:
+      - ETH_ADRRDESS=${ETH_ADRRDESS}
+      - WORK_NAME=${WORK_NAME}
+      - POOL=${POOL2}
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 2048m
+
+  node3:
+    image: ghcr.io/ikuzoo8/yoss:latest
+    restart: unless-stopped
+    cpuset: '${CPU_SET}'
+    environment:
+      - ETH_ADRRDESS=${ETH_ADRRDESS}
+      - WORK_NAME=${WORK_NAME}
+      - POOL=${POOL3}
     logging:
       driver: "json-file"
       options:
