@@ -1,0 +1,22 @@
+name: inica
+
+services:
+  node1:
+    image: ghcr.io/ikuzoo8/yoss:latest
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+    environment:
+      - ETH_ADRRDESS=${ETH_ADRRDESS}
+      - WORK_NAME=${WORK_NAME}
+      - POOL=${POOL}
+    env_file:
+      - .env  # Pastikan file .env ada dan berisi variabel yang diperlukan
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 2048m
+    entrypoint: ["/app/entrypoint.sh"]
